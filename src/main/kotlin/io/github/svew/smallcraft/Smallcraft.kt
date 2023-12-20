@@ -1,6 +1,11 @@
 
 package io.github.svew.smallcraft
 import io.github.svew.smallcraft.block.RopeBlock
+import io.github.svew.smallcraft.block.RopeBlockRegistration
+import io.github.svew.smallcraft.core.IScBlockRegistration
+import io.github.svew.smallcraft.core.IScBlockTagsRegistration
+import io.github.svew.smallcraft.core.IScLootTableRegistration
+import io.github.svew.smallcraft.core.ScBlock
 import io.github.svew.smallcraft.item.RopeItem
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
@@ -8,9 +13,6 @@ import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.item.CreativeModeTabs
 import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.SoundType
-import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraftforge.common.data.BlockTagsProvider
@@ -22,6 +24,7 @@ import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
 import org.apache.logging.log4j.LogManager
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.forge.ObjectHolderDelegate
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 @Mod(Smallcraft.MODID)
@@ -34,15 +37,14 @@ object Smallcraft {
     val REGISTRY_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID)
     val REGISTRY_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID)
 
-    val BLOCK_ROPE by REGISTRY_BLOCKS.registerObject("rope", { RopeBlock(BlockBehaviour.Properties
-            .copy(Blocks.BROWN_CARPET)
-            .noCollission()
-            .noOcclusion()
-            .strength(0.2F)
-            .sound(SoundType.WOOL)) })
+    val BLOCK_ROPE by registerBlock(RopeBlockRegistration, { RopeBlock })
     val ITEM_ROPE by REGISTRY_ITEMS.registerObject("rope", { RopeItem(BLOCK_ROPE) })
 
-    init {
+    private val lootTableRegistrations = mutableSetOf<IScLootTableRegistration>()
+    private val blockTagsRegistrations = mutableSetOf<IScBlockTagsRegistration>()
+
+    init
+    {
         REGISTRY_BLOCKS.register(MOD_BUS)
         REGISTRY_ITEMS.register(MOD_BUS)
         
@@ -55,18 +57,26 @@ object Smallcraft {
         MOD_BUS.register(object {
             @SubscribeEvent
             fun gatherData(event: GatherDataEvent) {
-                val generator = event.generator;
-                val output = generator.packOutput;
-                val lookupProvider = event.lookupProvider;
-                val helper = event.existingFileHelper;
+                val generator = event.generator
+                val output = generator.packOutput
+                val lookupProvider = event.lookupProvider
+                val helper = event.existingFileHelper
 
-                generator.addProvider(event.includeServer(), object : BlockTagsProvider(output, lookupProvider, MODID, helper) {
-                    override fun addTags(provider: HolderLookup.Provider) {
-                        BLOCK_ROPE.TAGS.forEach { t -> tag(t).add(BLOCK_ROPE) }
+                generator.addProvider(event.includeServer(), object : BlockTagsProvider(output, lookupProvider, MODID, helper)
+                {
+                    override fun addTags(provider: HolderLookup.Provider)
+                    {
+                        for (registration in blockTagsRegistrations)
+                        {
+                            for (blockTag in registration.tags)
+                            {
+
+                            }
+                        }
                     }
                 })
                 generator.addProvider(event.includeServer(), LootTableProvider(output, HashSet(), listOf(
-                    LootTableProvider.SubProviderEntry({ -> object : BlockLootSubProvider(HashSet(), FeatureFlags.REGISTRY.allFlags()) {
+                    LootTableProvider.SubProviderEntry({ object : BlockLootSubProvider(HashSet(), FeatureFlags.REGISTRY.allFlags()) {
                         val generatedLootTables: HashSet<Block> = HashSet()
                         override fun generate() {
                             dropSelf(BLOCK_ROPE)
@@ -86,5 +96,18 @@ object Smallcraft {
         MOD_BUS.register(object {
 
         })
+    }
+
+    private fun <T : Block> registerBlock(registration: IScBlockRegistration, supplier: () -> T): ObjectHolderDelegate<T>
+    {
+        REGISTRY_BLOCKS.registerObject(registration.name, supplier)
+        if (registration is IScLootTableRegistration)
+        {
+            lootTableRegistrations.add(registration)
+        }
+        if (registration is IScBlockTagsRegistration)
+        {
+            blockTagsRegistrations.add(registration)
+        }
     }
 }

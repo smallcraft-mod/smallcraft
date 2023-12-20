@@ -1,12 +1,12 @@
+@file:Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 package io.github.svew.smallcraft.block
 
 import io.github.svew.smallcraft.Smallcraft
-import io.github.svew.smallcraft.util.ITaggedBlock
+import io.github.svew.smallcraft.core.*
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
-import net.minecraft.tags.TagKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
@@ -18,8 +18,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -29,31 +29,34 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
+object RopeBlockRegistration
+    : IScBlockRegistration
+    , IScLootTableRegistration
+    , IScBlockTagsRegistration
+{
+    override val tags = arrayOf(BlockTags.CLIMBABLE)
+    override val name = "rope"
+    override val properties: BlockBehaviour.Properties = BlockBehaviour.Properties
+        .copy(Blocks.BROWN_CARPET)
+        .noCollission()
+        .noOcclusion()
+        .strength(0.2F)
+        .sound(SoundType.WOOL)
 
-
-@Suppress("OVERRIDE_DEPRECATION")
-class RopeBlock : Block, SimpleWaterloggedBlock, ITaggedBlock {
-
-    override val TAGS: Array<TagKey<Block>> = arrayOf(
-        BlockTags.CLIMBABLE
-    )
-
-    companion object K {
-        private val WATERLOGGED = BlockStateProperties.WATERLOGGED
-        private val LOWER_SUPPORT_AABB: VoxelShape = box(7.0, 0.0, 7.0, 9.0, 1.0, 9.0)
+    override fun registerLootTable(registry: ScLootTableRegistry)
+    {
+        registry.dropSelf(RopeBlock)
     }
+}
 
-    constructor(props: Properties) : super(props) {
-        this.registerDefaultState(this.stateDefinition.any()
-                .setValue(WATERLOGGED, false))
-    }
+object RopeBlock
+    : ScBlock(RopeBlockRegistration)
+    , SimpleWaterloggedBlock
+{
+    private val WATERLOGGED = defineState(BlockStateProperties.WATERLOGGED, false)
 
     override fun propagatesSkylightDown(blockState: BlockState, blockGetter: BlockGetter, blockPos: BlockPos): Boolean {
-        return !blockState.getValue(BlockStateProperties.WATERLOGGED);
-    }
-
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(WATERLOGGED);
+        return !blockState.getValue(WATERLOGGED);
     }
 
     override fun isPathfindable(state: BlockState, level: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
@@ -90,7 +93,7 @@ class RopeBlock : Block, SimpleWaterloggedBlock, ITaggedBlock {
     }
 
     override fun getBlockSupportShape(pState: BlockState, pReader: BlockGetter, pPos: BlockPos): VoxelShape {
-        return LOWER_SUPPORT_AABB
+        return box(7.0, 0.0, 7.0, 9.0, 1.0, 9.0)
     }
 
     override fun canBeReplaced(state: BlockState, useContext: BlockPlaceContext): Boolean {
@@ -114,10 +117,10 @@ class RopeBlock : Block, SimpleWaterloggedBlock, ITaggedBlock {
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        if (state.getValue(WATERLOGGED)) {
-            return Fluids.WATER.getSource(false)
+        return if (state.getValue(WATERLOGGED)) {
+            Fluids.WATER.getSource(false)
         } else {
-            return super.getFluidState(state)
+            super.getFluidState(state)
         }
     }
 
