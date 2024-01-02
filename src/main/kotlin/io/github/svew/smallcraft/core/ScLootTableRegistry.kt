@@ -3,7 +3,7 @@ package io.github.svew.smallcraft.core
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.StringRepresentable
-import net.minecraft.world.flag.FeatureFlagSet
+import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
@@ -16,35 +16,41 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProvider
 import java.util.function.BiConsumer
 import java.util.function.Function
 
-interface IScLootTableRegistration {
-    fun registerLootTable(registry: ScLootTableRegistry)
-}
-
-class ScLootTableRegistry(
-    private val registrations: List<IScLootTableRegistration>,
-    explosionResistant: Set<Item>,
-    flagSet: FeatureFlagSet,
-    map: Map<ResourceLocation, LootTable.Builder>)
-    : BlockLootSubProvider(explosionResistant, flagSet, map)
+class ScLootTableRegistry(private val registrations: List<ScBlockRegistration<*>>)
+    : BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags())
 {
+    private val generatedLootTables: HashSet<Block> = HashSet()
+
     override fun generate() {
         for (registration in registrations) {
-            registration.registerLootTable(this)
+            registration.addLootTable(this)
         }
     }
+
+    override fun add(block: Block, builder: LootTable.Builder)
+    {
+        generatedLootTables.add(block)
+        map[block.lootTable] = builder
+    }
+
+    override fun getKnownBlocks(): MutableIterable<Block> {
+        return generatedLootTables
+    }
+
+
 
     public override fun generate(p_249322_: BiConsumer<ResourceLocation, LootTable.Builder>) {
         super.generate(p_249322_)
     }
 
-    public override fun <T : FunctionUserBuilder<T>?> applyExplosionDecay(
+    public override fun <T : FunctionUserBuilder<T>> applyExplosionDecay(
         p_248695_: ItemLike,
         p_248548_: FunctionUserBuilder<T>
     ): T {
         return super.applyExplosionDecay(p_248695_, p_248548_)
     }
 
-    public override fun <T : ConditionUserBuilder<T>?> applyExplosionCondition(
+    public override fun <T : ConditionUserBuilder<T>> applyExplosionCondition(
         p_249717_: ItemLike,
         p_248851_: ConditionUserBuilder<T>
     ): T {
@@ -170,10 +176,6 @@ class ScLootTableRegistry(
         return super.createPetalsDrops(p_273240_)
     }
 
-    public override fun getKnownBlocks(): MutableIterable<Block> {
-        return super.getKnownBlocks()
-    }
-
     public override fun addNetherVinesDropTable(p_252269_: Block, p_250696_: Block) {
         super.addNetherVinesDropTable(p_252269_, p_250696_)
     }
@@ -204,9 +206,5 @@ class ScLootTableRegistry(
 
     public override fun add(p_251966_: Block, p_251699_: Function<Block, LootTable.Builder>) {
         super.add(p_251966_, p_251699_)
-    }
-
-    public override fun add(p_250610_: Block, p_249817_: LootTable.Builder) {
-        super.add(p_250610_, p_249817_)
     }
 }

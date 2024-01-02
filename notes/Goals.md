@@ -1,0 +1,25 @@
+- [ ] Reduce stack sizes
+	- [x] All stacks at or below 16
+- [ ] Tree stuff
+	- [ ] Trees are harder to chop down by hand (as difficult as stone)
+	- [ ] Chopping down trees causes all of its logs to fall down
+	- [ ] Leaves allow some snow to pass through
+	- [ ] Leaves slow down anyone walking on top of them
+- [ ] Breaking hard blocks like stone and wood causes damage
+- [ ] Barrel
+	- [ ] Can put dirt, sand, water, snow inside of it
+- [ ] Water physics
+	- [ ] Realistic terraria water!
+	- [ ] Need a way to keep the oceans from draining
+		- Flow rate dictates whether a source body of water will empty, and how much a sink body of water will fill
+		- Additionally, size of the body of water may contribute too
+		- Water cycle? Heavy rain actually adds water to bodies of water?
+- [ ] Redstone
+	- [ ] Add copper nugget
+	- [ ] Remove redstone dust block (not item)
+	- [ ] Add redstone wire blockitem (created from dust and copper nugget)
+	- [ ] Wires can be placed on the sides of blocks
+	- [ ] Remove sculk sensors
+- [ ] Equipment slots
+	- Kinda like Terraria equipment, includes things like Totem of Undying, Backpacks, 
+- [ ] Totem of Goldthumb (Activates when nearby ores and gems)
