@@ -1,51 +1,61 @@
 package io.github.svew.smallcraft.item
 
-import io.github.svew.smallcraft.Smallcraft
+import io.github.svew.smallcraft.Smallcraft.ROPE_BLOCK
 import io.github.svew.smallcraft.block.RopeBlock
-import net.minecraft.core.BlockPos
+import io.github.svew.smallcraft.block.tryReelRopeIn
+import io.github.svew.smallcraft.core.ScBlockItem
+import io.github.svew.smallcraft.core.ScBlockItemRegistration
+import io.github.svew.smallcraft.util.scanLinearWhile
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
 import net.minecraft.world.InteractionResult
-import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.CreativeModeTabs
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.context.UseOnContext
-import net.minecraft.world.level.block.state.BlockState
 
-class RopeItem(block: RopeBlock) : BlockItem(block, Properties()) {
+object RopeItemRegistration : ScBlockItemRegistration<RopeItem>()
+{
+    override val id = "rope"
+    override val new = { RopeItem(this) }
+    override val block get() = ROPE_BLOCK
+    override val properties: Item.Properties = Item.Properties()
+    override val creativeModeTabs = setOf(CreativeModeTabs.TOOLS_AND_UTILITIES)
+}
 
-    override fun updatePlacementContext(context: BlockPlaceContext): BlockPlaceContext? {
-        val pos = (context as UseOnContext).clickedPos
-        Smallcraft.LOGGER.debug("=======================================")
-        Smallcraft.LOGGER.debug("Clicked on position ${pos.x}, ${pos.y}")
+class RopeItem(registration: ScBlockItemRegistration<RopeItem>)
+    : ScBlockItem(registration)
+{
+    override fun useOn(context: UseOnContext): InteractionResult
+    {
+        if (!context.isSecondaryUseActive) return super.useOn(context)
+
+        val pos = context.clickedPos
         val level = context.level
 
-        if (level.getBlockState(pos).block !is RopeBlock) {
-            Smallcraft.LOGGER.debug("Block is not a rope block, will be placed if there's a supporting block above")
-            // Let RopeBlock.canSurvive handle placement on non-rope blocks
-            return context
-        }
+        if (level.getBlockState(pos).block !is RopeBlock) return super.useOn(context)
 
-        val iterPos = pos.mutable()
-        for (i in 0..128) {
-            iterPos.move(Direction.DOWN)
-            val state = level.getBlockState(iterPos)
-            Smallcraft.LOGGER.debug("Inspecting block at ${iterPos.x}, ${iterPos.y}. Found ${state.block.name}")
+        return tryReelRopeIn(level, pos, context.player)
+    }
 
-            if (state.block is RopeBlock) {
-                Smallcraft.LOGGER.debug("Found a rope, let's move down...")
-                continue
-            }
-            val fluidState = state.fluidState
-            if (fluidState.isEmpty == false && fluidState.`is`(FluidTags.WATER) == false) {
-                Smallcraft.LOGGER.debug("We're in lava or something")
-                return null // We're in lava or something
-            }
-            if (state.canBeReplaced()) {
-                return BlockPlaceContext.at(context, iterPos, Direction.DOWN)
-            }
-            Smallcraft.LOGGER.debug("Block could not be replaced")
-            return null
-        }
-        return null
+    override fun updatePlacementContext(context: BlockPlaceContext): BlockPlaceContext?
+    {
+        val pos = (context as UseOnContext).clickedPos
+        val level = context.level
+
+        // Let RopeBlock.canSurvive handle placement on non-rope blocks
+        if (level.getBlockState(pos).block !is RopeBlock) return context
+
+        val (bottomRopePos, _, _) = scanLinearWhile(level, pos, Direction.DOWN, ROPE_BLOCK).last()
+        if (bottomRopePos.y == level.minBuildHeight) return null // Can't place lower than is possible
+
+        val placementRopePos = bottomRopePos.below()
+        val placementState = level.getBlockState(placementRopePos)
+        if (!placementState.canBeReplaced()) return null
+
+        val fluidState = placementState.fluidState
+        if (!fluidState.isEmpty && fluidState.`is`(FluidTags.WATER) == false) return null // We're in lava or something
+
+        return BlockPlaceContext.at(context, placementRopePos, Direction.DOWN)
     }
 }
