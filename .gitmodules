@@ -1,0 +1,15 @@
+[submodule "external/quark"]
+	path = external/quark
+	url = https://github.com/smallcraft-mod/quark.git
+[submodule "external/sullys-mod"]
+	path = external/sullys-mod
+	url = https://github.com/smallcraft-mod/sullys-mod.git
+[submodule "external/farmers-delight"]
+	path = external/farmers-delight
+	url = https://github.com/smallcraft-mod/farmers-delight.git
+[submodule "external/cave-dust"]
+	path = external/cave-dust
+	url = https://github.com/smallcraft-mod/cave-dust.git
+[submodule "external/snow-under-trees-fabric"]
+	path = external/snow-under-trees-fabric
+	url = https://github.com/smallcraft-mod/snow-under-trees-fabric.git

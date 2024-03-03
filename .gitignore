@@ -29,3 +29,6 @@ forge*changelog.txt
 # Custom for development
 .vscode
 vanilla-assets
+
+# Obsidian/notes
+notes/.trash
