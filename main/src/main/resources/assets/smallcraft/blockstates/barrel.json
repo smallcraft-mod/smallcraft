@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "smallcraft:block/barrel"
+        }
+    }
+}

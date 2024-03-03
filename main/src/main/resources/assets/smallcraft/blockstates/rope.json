@@ -1,0 +1,7 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "smallcraft:block/rope_post" }
+    }
+  ]
+}

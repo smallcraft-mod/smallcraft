@@ -1,0 +1,123 @@
+# Benefits
+- Regenerates health
+- Can make you move more swiftly
+- Can help you do more damage
+- Can help you break blocks slightly faster
+---
+# Base Foods
+## Plant-Based
+- Apple
+- Beet
+- Cabbage
+- Cactus
+- Carrot
+- Cocoa Beans
+- Dried Kelp
+- Glow Berries
+- Honey
+- Melon
+- Mushroom (Brown)
+- Mushroom (Red)
+- Onion
+- Potato
+- Rice
+- Sugar
+- Sweet Berries
+- Tomato
+- Wheat
+## Animal-Based
+- Beef
+- Chicken
+- Cod
+- Egg
+- Milk
+- Mutton
+- Pork
+- Rabbit
+- Salmon
+# Relevant Blocks/Items
+## Blocks
+- Cooking Pot
+- Cutting Board
+- Smoker
+- Stove
+- Teapot
+- \*Mortar & Pestle
+## Items
+- Bottle
+- Bowl
+- Knife
+# Finished Foods
+- Sushi
+	- Salmon Roll
+	- Cod Roll
+	- Kelp Roll (Kelp Roll Slice)
+- Soup
+	- Bone Broth
+	- Beef Stew
+	- Chicken Soup
+	- Vegetable Soup
+	- Fish Stew
+	- Pumpkin Soup
+	- Baked Cod Stew
+	- Noodle Soup
+	- Beetroot Soup
+	- Rabbit Stew
+	- Mushroom Stew
+- Light Sweet
+	- Sweet Berry Cookie
+	- Honey Cookie
+	- Melon Popsicle
+	- Glow Berry Custard
+	- Chocolate Chip Cookie
+- Heavy Sweet
+	- Apple Pie
+	- Sweet Berry Cheesecake
+	- Chocolate Pie
+	- Pumpkin Pie
+	- Cake
+- Drinks
+	- Milk
+	- Hot Cocoa
+	- Apple Cider
+	- Melon Juice
+	- Water
+- Healthy
+	- Fruit Salad
+	- Mixed Salad
+	- Cabbage Rolls
+- Feast
+	- Stuffed Pumpkin
+	- Roast Chicken
+	- Honey Glazed Ham
+	- Shepherd's Pie
+- Unsorted
+	- Barbeque on a Stick
+	- Egg sandwich
+	- Chicken Sandwich
+	- Hamburger
+	- Bacon Sandwich
+	- Mutton Wrap
+	- Dumplings
+	- Stuffed Potato
+	- Fried Rice
+	- Bacon and Eggs
+	- Pasta with Meatballs
+	- Pasta with Mutton Chop
+	- Mushroom Rice
+	- Roasted Mutton Chops
+	- Vegetable Noodles
+	- Steak and Potatoes
+	- Ratatouille
+	- Squid Ink Pasta
+	- Grilled Salmon
+	- Rice Roll Medley
+---
+# Food Biomes
+## Underground
+- Mushroom (Brown)
+- Mushroom (Red)
+- Glow Berries
+## Tundra
+- Sweet Berries
+- Rabbit

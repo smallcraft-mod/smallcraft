@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"6132d7d7cf99234a","x":0,"y":-500,"width":104,"height":60,"color":"4","type":"text","text":"Logs"},
+		{"id":"97fc66dcc84abf67","x":0,"y":-400,"width":106,"height":60,"color":"4","type":"text","text":"Sticks"},
+		{"id":"7b2496526d7f559c","type":"text","text":"Chop down a tree","x":-355,"y":-440,"width":195,"height":62},
+		{"id":"c9d757f829320ef9","type":"text","text":"Create a Crafting Table","x":180,"y":-458,"width":235,"height":58}
+	],
+	"edges":[
+		{"id":"c7d145ce14c5caeb","fromNode":"7b2496526d7f559c","fromSide":"right","toNode":"6132d7d7cf99234a","toSide":"left"},
+		{"id":"b7e8a1c2cdfa1b83","fromNode":"7b2496526d7f559c","fromSide":"right","toNode":"97fc66dcc84abf67","toSide":"left"}
+	]
+}

@@ -1,0 +1,6 @@
+- Achievements/advancements give a trophy of some kind that you can put on display
+- Hotbar, when not used, can be hidden. This can be a toggle-able option
+- Biome titles pop up when you enter a new biome
+- Shift-placing chests won't combine them
+- Wood-specific chests?
+- Torches can be used to burn vine tips so they don't grow

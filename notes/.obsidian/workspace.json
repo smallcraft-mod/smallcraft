@@ -1,84 +1,39 @@
 {
   "main": {
-    "id": "753d89b5870bf902",
+    "id": "e6c612b753bf94cb",
     "type": "split",
     "children": [
       {
-        "id": "06e2216a456f9e59",
+        "id": "cecdf1432cd7f09e",
         "type": "tabs",
         "children": [
           {
-            "id": "4fee2b3b36c87844",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          },
-          {
-            "id": "047c8c219e295d18",
+            "id": "3fdadeab0eff5064",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mods.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ddbee249678c909a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Keybindings.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d5d2c147af3a0cd6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Goals.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a8409b7ad56d7537",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Goals.md",
+                "file": "World/World Shape.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "bca777a098a7cc68",
+    "id": "541a26b03354d947",
     "type": "split",
     "children": [
       {
-        "id": "00eb9212950fd452",
+        "id": "136923612a97bc97",
         "type": "tabs",
         "children": [
           {
-            "id": "005b7e50bcba0d1a",
+            "id": "4204f27e1c2b2f28",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -88,7 +43,7 @@
             }
           },
           {
-            "id": "ee2db76c32a700f0",
+            "id": "fd4c84e1cd92187e",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -103,7 +58,7 @@
             }
           },
           {
-            "id": "af5e30ab14f72493",
+            "id": "7c92ab13d0da36a0",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -117,20 +72,20 @@
     "width": 300
   },
   "right": {
-    "id": "62739bc01cafa1ce",
+    "id": "3cf8aa2963fabe33",
     "type": "split",
     "children": [
       {
-        "id": "38abc56dea094558",
+        "id": "6b3b46d7098afd0e",
         "type": "tabs",
         "children": [
           {
-            "id": "8449fb71862d62df",
+            "id": "6ad6737b2cac4baf",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Goals.md",
+                "file": "World/World Shape.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -142,19 +97,19 @@
             }
           },
           {
-            "id": "0e8b7f0989e18924",
+            "id": "f28c84b499be5107",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Goals.md",
+                "file": "World/World Shape.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "427be80d9bdd2bc2",
+            "id": "b41f033bf5950ab4",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -165,12 +120,12 @@
             }
           },
           {
-            "id": "8b85136517f04c8c",
+            "id": "34eef0be4468d444",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Goals.md"
+                "file": "World/World Shape.md"
               }
             }
           }
@@ -191,13 +146,55 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a8409b7ad56d7537",
+  "active": "3fdadeab0eff5064",
   "lastOpenFiles": [
-    "World Shape.md",
-    "Goals.md",
-    "Ladder Behaviour.md",
-    "Keybindings.md",
-    "Untitled",
-    "Mods.md"
+    "World/Biomes.md",
+    "World/World Shape.md",
+    "Miscellaneous/Goals.md",
+    "Miscellaneous/Ideas.md",
+    "Miscellaneous/Keybindings.md",
+    "Miscellaneous/Research.md",
+    "Block and Material Variants/Quick Build Blocks.md",
+    "Block and Material Variants/Block Charts.md",
+    "Untitled.canvas",
+    "Progression/Equipment.md",
+    "World",
+    "Progression/Armor.md",
+    "Progression/Food.md",
+    "Progression/Food Graph.canvas",
+    "Progression/Graph.canvas",
+    "Progression/Upgrades.md",
+    "Progression/Potions.md",
+    "Progression/Ores.md",
+    "Data/Data Language Concept.md",
+    "Miscellaneous/Mods.md",
+    "Miscellaneous/Ladder Behaviour.md",
+    "Items/Stone.md",
+    "Data",
+    "Miscellaneous",
+    "MC Ultimate List.xlsx",
+    "Progression/Overview.md",
+    "Progression",
+    "Upgrades/Untitled.md",
+    "Progression/Ores",
+    "Upgrades",
+    "Block and Material Variants/Quick Build Blocks_WSVE-02_Feb-26-162716-2024_Conflict.md",
+    "Block and Material Variants/Quick Build Blocks_WSVE-02_Feb-26-161535-2024_Conflict.md",
+    "Block and Material Variants/Quick Build Blocks_WSVE-02_Feb-26-161015-2024_Conflict.md",
+    "Block and Material Variants/Quick Build Blocks_WSVE-02_Feb-26-160953-2024_Conflict.md",
+    "Block and Material Variants/Assets/150px-Bamboo_Planks_JE2_BE2.webp",
+    "Block and Material Variants/Assets/150px-Cherry_Planks_JE1_BE1.webp",
+    "Block and Material Variants/Assets/150px-Mangrove_Planks_JE1_BE1.webp",
+    "Block and Material Variants/Assets/150px-Dark_Oak_Planks_JE3_BE2 1.webp",
+    "Block and Material Variants/Block Charts_WSVE-02_Feb-26-155112-2024_Conflict.md",
+    "Block and Material Variants/Assets/150px-Dark_Oak_Planks_JE3_BE2.webp",
+    "Block and Material Variants/Assets/150px-Acacia_Planks.webp",
+    "Block and Material Variants/Assets/150px-Jungle_Planks_JE3_BE2.webp",
+    "Block and Material Variants/Assets/150px-Birch_Planks.webp",
+    "Block and Material Variants/Assets/150px-Spruce_Planks_JE4_BE2.webp",
+    "Block and Material Variants/Assets/150px-Oak_Planks.webp",
+    "Block and Material Variants/Assets",
+    "Block and Material Variants",
+    "Block Variants/Assets"
   ]
 }
